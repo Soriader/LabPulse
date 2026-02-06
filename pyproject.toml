@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labpulse"
+version = "0.1.0"
+description = "Laboratory QC and alerting toolkit"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas",
+  "numpy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
