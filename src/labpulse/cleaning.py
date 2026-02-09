@@ -5,30 +5,37 @@ def prepare_base_df(path: str) -> pd.DataFrame:
     """
     Load raw CSV data and perform basic cleaning:
     - replace invalid measurement tokens with NaN
+    - normalize decimal separator
     - convert values to numeric
     - parse date column to datetime
-
-    Parameters
-    ----------
-    path : str
-        Path to raw CSV file.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with added columns: value_clean, value_num, date_dt
     """
 
     df = pd.read_csv(path)
 
     bad_tokens = ["error", "bad_reading", "N/A"]
+
+    #replace invalid tokens
     df["value_clean"] = df["value"].replace(bad_tokens, np.nan)
 
+    #normalize decimal separator
+    df["value_clean"] = (
+        df["value_clean"]
+        .astype(str)
+        .str.replace(",", ".", regex=False)
+    )
+
+    #convert to numeric
     df["value_num"] = pd.to_numeric(df["value_clean"], errors="coerce")
 
-    df["date_dt"] = pd.to_datetime(df["date"], errors="coerce")
+    #parse date
+    df["date_dt"] = pd.to_datetime(
+        df["date"],
+        format="%Y-%m-%d",
+        errors="coerce"
+    )
 
     return df
+
 
 def filter_numeric_rows(df: pd.DataFrame) -> pd.DataFrame:
     """
