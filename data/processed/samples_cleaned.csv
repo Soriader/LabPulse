@@ -4,10 +4,12 @@ sample_id,product,parameter,value,unit,date,value_clean,value_num,date_dt,expect
 28,HSFO,Viscosity,239.1,cSt,2026-01-26,239.1,239.1,2026-01-26,cSt,True
 37,JetA1,Chloride,14.31,mg/kg,2026-01-16,14.31,14.31,2026-01-16,mg/kg,True
 41,Gasoline,Water,106.76,mg/kg,2026-01-17,106.76,106.76,2026-01-17,mg/kg,True
+32,JetA1,Ash,0.0127,ppm,2026-01-07,0.0127,0.0127,2026-01-07,% m/m,False
 46,JetA1,Viscosity,97.3,cSt,2026-01-05,97.3,97.3,2026-01-05,cSt,True
 73,Gasoline,Sulfur,493.62,mg/kg,2026-01-25,493.62,493.62,2026-01-25,mg/kg,True
 72,HSFO,Viscosity,211.2,cSt,2026-01-16,211.2,211.2,2026-01-16,cSt,True
 89,Gasoline,Chloride,17.87,mg/kg,2026-01-26,17.87,17.87,2026-01-26,mg/kg,True
+66,Gasoline,Water,131.45,mg/L,2026-01-28,131.45,131.45,2026-01-28,mg/kg,False
 92,HSFO,Ash,0.0463,% m/m,2026-01-18,0.0463,0.0463,2026-01-18,% m/m,True
 42,Diesel,Ash,0.03,% m/m,2026-01-14,0.03,0.03,2026-01-14,% m/m,True
 76,Diesel,Chloride,14.8,mg/kg,2026-01-26,14.8,14.8,2026-01-26,mg/kg,True
@@ -23,6 +25,7 @@ sample_id,product,parameter,value,unit,date,value_clean,value_num,date_dt,expect
 114,Diesel,Water,136.29,mg/kg,2026-01-25,136.29,136.29,2026-01-25,mg/kg,True
 108,Diesel,Ash,0.0098,% m/m,2026-01-12,0.0098,0.0098,2026-01-12,% m/m,True
 94,HSFO,Water,825.0,mg/kg,2026-01-16,825.0,825.0,2026-01-16,mg/kg,True
+31,JetA1,Water,110.22,mg/L,2026-01-21,110.22,110.22,2026-01-21,mg/kg,False
 68,Gasoline,Water,148.02,mg/kg,2026-01-15,148.02,148.02,2026-01-15,mg/kg,True
 20,JetA1,Sulfur,418.44,mg/kg,2026-01-06,418.44,418.44,2026-01-06,mg/kg,True
 100,Diesel,Viscosity,212.8,cSt,2026-01-17,212.8,212.8,2026-01-17,cSt,True
@@ -75,6 +78,7 @@ sample_id,product,parameter,value,unit,date,value_clean,value_num,date_dt,expect
 99,HSFO,Chloride,19.54,mg/kg,2026-01-14,19.54,19.54,2026-01-14,mg/kg,True
 2,Diesel,Chloride,10.31,mg/kg,2026-01-23,10.31,10.31,2026-01-23,mg/kg,True
 33,HSFO,Viscosity,308.3,cSt,2026-01-28,308.3,308.3,2026-01-28,cSt,True
+17,Gasoline,Chloride,8.08,mg/L,2026-01-10,8.08,8.08,2026-01-10,mg/kg,False
 29,Gasoline,Viscosity,264.0,cSt,2026-01-17,264.0,264.0,2026-01-17,cSt,True
 118,HSFO,Sulfur,224.53,mg/kg,2026-01-16,224.53,224.53,2026-01-16,mg/kg,True
 80,HSFO,Water,825.0,mg/kg,2026-01-13,825.0,825.0,2026-01-13,mg/kg,True
@@ -95,6 +99,7 @@ sample_id,product,parameter,value,unit,date,value_clean,value_num,date_dt,expect
 62,HSFO,Sulfur,445.54,mg/kg,2026-01-22,445.54,445.54,2026-01-22,mg/kg,True
 10,Gasoline,Viscosity,279.1,cSt,2026-01-06,279.1,279.1,2026-01-06,cSt,True
 74,Diesel,Water,88.76,mg/kg,2026-01-17,88.76,88.76,2026-01-17,mg/kg,True
+90,HSFO,Water,123.51,mg/L,2026-01-01,123.51,123.51,2026-01-01,mg/kg,False
 105,HSFO,Sulfur,432.09,mg/kg,2026-01-23,432.09,432.09,2026-01-23,mg/kg,True
 35,Diesel,Ash,0.0409,% m/m,2026-01-09,0.0409,0.0409,2026-01-09,% m/m,True
 120,HSFO,Water,142.11,mg/kg,2026-01-25,142.11,142.11,2026-01-25,mg/kg,True
