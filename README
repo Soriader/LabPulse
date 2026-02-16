@@ -1,0 +1,5 @@
+## Run pipeline
+python main.py
+
+## Tests
+python -m pytest
