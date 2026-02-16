@@ -1,5 +1,132 @@
-## Run pipeline
+Laboratory QC and Alerting Toolkit
+
+LabPulse is a data processing system for laboratory fuel quality analysis.
+It performs data cleaning, quality control (QC), outlier detection, and exposes results via a REST API and interactive dashboard.
+
+🚀 Features
+
+-Data cleaning and validation
+-Unit consistency checks (QC rules)
+-IQR-based outlier detection
+-Versioned processed outputs
+-REST API (FastAPI)
+-Interactive dashboard (Streamlit)
+-Automated unit tests (pytest)
+
+🏗 Architecture
+
+Raw data (data/raw)
+→ Pipeline (cleaning → QC → outliers)
+→ Versioned outputs (data/processed/<run_id>/)
+→ FastAPI (JSON endpoints)
+→ Streamlit Dashboard (interactive UI)
+
+📦 Installation
+
+Clone the repository and install the project in editable mode:
+
+pip install -e .
+
+Optional dependencies:
+
+pip install .[dev] # pytest
+pip install .[dashboard] # streamlit + requests
+
+⚙️ Running the Pipeline
+
+To process raw data and generate a new versioned run:
+
 python main.py
 
-## Tests
+This creates a new folder in:
+
+data/processed/<YYYY-MM-DD_HH-MM-SS>/
+
+Containing:
+
+samples_cleaned.csv
+
+alerts_outliers_iqr.csv
+
+Each pipeline execution produces a new versioned run to preserve processing history.
+
+🌐 Running the API
+
+Start the FastAPI server:
+
+uvicorn labpulse.api.main:app --reload
+
+Available endpoints:
+
+GET /health
+
+GET /runs/latest
+
+GET /samples/latest
+
+GET /alerts/latest
+
+Interactive API documentation:
+
+http://127.0.0.1:8000/docs
+
+📊 Running the Dashboard
+
+In a separate terminal:
+
+streamlit run dashboard.py
+
+Dashboard runs on:
+
+http://localhost:8501
+
+The dashboard consumes data from the FastAPI backend.
+
+Make sure the API server is running before launching the dashboard.
+
+🧪 Running Tests
+
 python -m pytest
+
+Tests cover:
+
+Cleaning logic
+
+QC rule validation
+
+Outlier detection
+
+Pipeline execution
+
+Data persistence
+
+📁 Project Structure
+
+src/labpulse/
+cleaning.py
+qc_rules.py
+alerts.py
+io_utils.py
+api/
+main.py
+
+data/
+raw/
+processed/
+
+dashboard.py
+main.py
+tests/
+
+Future Improvements
+
+-Pagination and filtering in API endpoints
+-Authentication for API access
+-Advanced statistical quality metrics
+-Dockerized deployment
+-CI/CD pipeline integration
+-Cloud deployment (AWS/Azure/GCP)
+
+📄 License
+
+MIT License
