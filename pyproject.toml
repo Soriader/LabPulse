@@ -15,8 +15,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest"]
-dashboard = ["streamlit", "requests"]
+dev = ["pytest", "httpx"]
+dashboard = ["streamlit", "requests", "matplotlib"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

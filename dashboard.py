@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
 
 API_BASE = "http://127.0.0.1:8000"
 
@@ -87,3 +88,18 @@ with t1:
 with t2:
     st.subheader("Alerts (latest)")
     st.dataframe(filtered_alerts, use_container_width=True)
+
+st.subheader("Distribution (value_num)")
+
+if "value_num" in filtered_samples.columns and len(filtered_samples):
+    series = pd.to_numeric(filtered_samples["value_num"], errors="coerce").dropna()
+    if len(series):
+        fig, ax = plt.subplots()
+        ax.hist(series, bins=20)
+        ax.set_xlabel("value_num")
+        ax.set_ylabel("count")
+        st.pyplot(fig)
+    else:
+        st.info("No numeric value_num available after filtering.")
+else:
+    st.info("Column value_num not available in samples or no data after filtering.")
