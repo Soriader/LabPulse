@@ -25,7 +25,7 @@ def detect_iqr_outliers(df: pd.DataFrame, group_col: str = "parameter", value_co
     outliers = (
         df
         .groupby(group_col, group_keys=False)
-        .apply(_detect_iqr_outliers_for_group)
+        .apply(_detect_iqr_outliers_for_group, include_groups=False)
         .reset_index(drop=True)
     )
 
