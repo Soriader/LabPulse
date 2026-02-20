@@ -1,132 +1,222 @@
-Laboratory QC and Alerting Toolkit
+# LabPulse
 
-LabPulse is a data processing system for laboratory fuel quality analysis.
-It performs data cleaning, quality control (QC), outlier detection, and exposes results via a REST API and interactive dashboard.
+![Tests](https://github.com/Soriader/LabPulse/actions/workflows/tests.yml/badge.svg)
 
-🚀 Features
+LabPulse is a modular data processing framework for laboratory fuel quality analysis.
 
--Data cleaning and validation
--Unit consistency checks (QC rules)
--IQR-based outlier detection
--Versioned processed outputs
--REST API (FastAPI)
--Interactive dashboard (Streamlit)
--Automated unit tests (pytest)
+It implements a reproducible data pipeline with cleaning, validation rules, outlier detection,
+REST API exposure, interactive dashboard visualization, and continuous integration testing.
 
-🏗 Architecture
+This project demonstrates practical data engineering concepts:
+modular architecture, versioned data outputs, automated testing, API design,
+and dashboard-based data presentation.
 
+---
+
+## 🚀 Features
+
+- Data cleaning and validation
+- Unit consistency checks (QC rules)
+- IQR-based outlier detection
+- Versioned processed outputs (timestamped runs)
+- REST API (FastAPI)
+- Interactive dashboard (Streamlit)
+- Automated unit tests (pytest)
+- Continuous Integration (GitHub Actions)
+
+---
+
+## 🏗 Architecture
+
+```
 Raw data (data/raw)
-→ Pipeline (cleaning → QC → outliers)
-→ Versioned outputs (data/processed/<run_id>/)
-→ FastAPI (JSON endpoints)
-→ Streamlit Dashboard (interactive UI)
+        ↓
+Pipeline (cleaning → QC → outliers)
+        ↓
+Versioned outputs (data/processed/<run_id>/)
+        ↓
+FastAPI (JSON endpoints)
+        ↓
+Streamlit Dashboard (interactive UI)
+```
 
-📦 Installation
+Each pipeline execution generates a timestamped directory,
+ensuring reproducibility and historical traceability.
 
-Clone the repository and install the project in editable mode:
+The API always reads from the latest processed run.
 
+---
+
+## 📥 Expected Input Format
+
+Raw CSV files placed in `data/raw/` must contain the following columns:
+
+- `sample_id` (int)
+- `product` (str)
+- `parameter` (str)
+- `value` (numeric or string)
+- `unit` (str)
+- `date` (YYYY-MM-DD)
+
+Example:
+
+```
+sample_id,product,parameter,value,unit,date
+44,JetA1,Viscosity,137.2,cSt,2026-01-02
+101,HSFO,Ash,0.0136,% m/m,2026-01-07
+```
+
+---
+
+## 📦 Installation
+
+Clone the repository and install in editable mode:
+
+```bash
 pip install -e .
+```
 
 Optional dependencies:
 
-pip install .[dev] # pytest
-pip install .[dashboard] # streamlit + requests
+```bash
+pip install .[dev]        # pytest
+pip install .[dashboard]  # streamlit + requests
+```
 
-⚙️ Running the Pipeline
+---
+
+## ⚙️ Running the Pipeline
 
 To process raw data and generate a new versioned run:
 
+```bash
 python main.py
+```
 
-This creates a new folder in:
+This creates a new folder:
 
+```
 data/processed/<YYYY-MM-DD_HH-MM-SS>/
+```
 
 Containing:
 
-samples_cleaned.csv
+- `samples_cleaned.csv`
+- `alerts_outliers_iqr.csv`
 
-alerts_outliers_iqr.csv
+Each execution preserves previous results.
 
-Each pipeline execution produces a new versioned run to preserve processing history.
+---
 
-🌐 Running the API
+## 🌐 Running the API
 
 Start the FastAPI server:
 
+```bash
 uvicorn labpulse.api.main:app --reload
+```
 
 Available endpoints:
 
-GET /health
-
-GET /runs/latest
-
-GET /samples/latest
-
-GET /alerts/latest
+- `GET /health`
+- `GET /runs/latest`
+- `GET /samples/latest`
+- `GET /alerts/latest`
 
 Interactive API documentation:
 
+```
 http://127.0.0.1:8000/docs
+```
 
-📊 Running the Dashboard
+---
+
+## 📊 Running the Dashboard
 
 In a separate terminal:
 
+```bash
 streamlit run dashboard.py
+```
 
-Dashboard runs on:
+Dashboard runs at:
 
+```
 http://localhost:8501
+```
 
 The dashboard consumes data from the FastAPI backend.
 
 Make sure the API server is running before launching the dashboard.
 
-🧪 Running Tests
+---
 
+## 🧪 Running Tests
+
+```bash
 python -m pytest
+```
 
 Tests cover:
 
-Cleaning logic
+- Cleaning logic
+- QC rule validation
+- Outlier detection
+- Pipeline execution
+- Data persistence
+- API endpoints
 
-QC rule validation
+CI is automatically executed on every push via GitHub Actions.
 
-Outlier detection
+---
 
-Pipeline execution
+## 📁 Project Structure
 
-Data persistence
+```
+LabPulse/
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── notebooks/
+│   ├── 01_load_and_audit/
+│   ├── 02_cleaning/
+│   └── 03_analysis/
+│
+├── src/labpulse/
+│   ├── cleaning.py
+│   ├── qc_rules.py
+│   ├── alerts.py
+│   ├── io_utils.py
+│   └── api/
+│       └── main.py
+│
+├── tests/
+├── dashboard.py
+├── main.py
+├── pyproject.toml
+└── README.md
+```
 
-📁 Project Structure
+---
 
-src/labpulse/
-cleaning.py
-qc_rules.py
-alerts.py
-io_utils.py
-api/
-main.py
+## 🔮 Future Improvements
 
-data/
-raw/
-processed/
+- Pagination and filtering in API endpoints
+- Authentication for API access
+- Advanced statistical quality metrics
+- Dockerized deployment
+- Cloud deployment (AWS/Azure/GCP)
+- Role-based access control
+- Data quality scoring system
 
-dashboard.py
-main.py
-tests/
+---
 
-Future Improvements
-
--Pagination and filtering in API endpoints
--Authentication for API access
--Advanced statistical quality metrics
--Dockerized deployment
--CI/CD pipeline integration
--Cloud deployment (AWS/Azure/GCP)
-
-📄 License
+## 📄 License
 
 MIT License
